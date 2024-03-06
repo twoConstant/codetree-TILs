@@ -13,8 +13,9 @@ public class Main {
         for(int i = 1; i < n + 1;i++) {
             deque.addLast(i);
         }
+        int size = deque.size() - 1;
 
-        for(int i = 0; i < deque.size() - 1; i++){
+        for(int i = 0; i < size; i++){
             deque.pollFirst();
             deque.addLast(deque.pollFirst());
         }
