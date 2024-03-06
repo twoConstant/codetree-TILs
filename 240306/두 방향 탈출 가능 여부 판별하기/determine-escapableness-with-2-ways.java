@@ -72,7 +72,7 @@ public class Main {
         int i = node.i;
         int j = node.j;
 
-        if (i >= 0 && i < N && j >= 0 && j < M && !visited[i][j] && arr[i][j] != 1) {
+        if (i >= 0 && i < N && j >= 0 && j < M && !visited[i][j] && arr[i][j] != 0) {
             return true;
         }
         return false;
