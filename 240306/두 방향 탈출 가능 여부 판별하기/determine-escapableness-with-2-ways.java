@@ -7,26 +7,14 @@ public class Main {
     private static int N;
     private static int M;
     private static int[][] arr;
-    private static Boolean flag;
-
-    public static class Node{
-        private int i;
-        private int j;
-
-        public Node(int i, int j) {
-            this.i = i;
-            this.j = j;
-        }
-    }
+    private static boolean flag; // Boolean 대신 기본형 boolean 사용
 
     public static void main(String[] args) throws IOException{
-        // 여기에 코드를 작성해주세요.
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        // arr만들기
         arr = new int[N][M];
         for(int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -35,44 +23,37 @@ public class Main {
             }
         }
 
-        Node node = new Node(0, 0);
-        dfs(node);
+        dfs(0, 0); // 시작 위치를 파라미터로 전달
 
-        if(flag) {
-            System.out.println(1);
-        } else {
-            System.out.println(0);
-        }
-
+        System.out.println(flag ? 1 : 0);
     }
-    public static void dfs(Node node) {
-        Stack<Node> stack = new Stack<>();
+
+    public static void dfs(int i, int j) {
+        Stack<int[]> stack = new Stack<>();
         boolean[][] visited = new boolean[N][M];
         flag = false;
-        stack.push(node);
-        visited[node.i][node.j] = true;
+        stack.push(new int[]{i, j});
+        visited[i][j] = true;
 
-        while(!stack.empty()){
-            Node cn = stack.pop();
-            if (cn.i == N - 1 && cn.j == M - 1){
+        while(!stack.isEmpty()){
+            int[] cn = stack.pop();
+            if (cn[0] == N - 1 && cn[1] == M - 1){
                 flag = true;
+                break; // 목적지에 도달하면 더 이상 탐색 중단
             }
-            for(int i = 0; i < 2; i++) {
-                Node wn = new Node(cn.i + di[i], cn.j + dj[i]);
-                if (isCanPush(wn, visited)){
-                    stack.push(wn);
+            for(int k = 0; k < 2; k++) {
+                int ni = cn[0] + di[k];
+                int nj = cn[1] + dj[k];
+                if (isCanPush(ni, nj, visited)){
+                    stack.push(new int[]{ni, nj});
                 }
             }
-
         }
-
     }
-    // 노드를 받았을때 푸쉬 될 자격이 있는지 판단하기
-    public static Boolean isCanPush(Node node, boolean[][] visited) {
-        int i = node.i;
-        int j = node.j;
 
+    public static boolean isCanPush(int i, int j, boolean[][] visited) {
         if (i >= 0 && i < N && j >= 0 && j < M && !visited[i][j] && arr[i][j] != 0) {
+            visited[i][j] = true; // 방문 표시를 여기서 해야 중복 방문을 방지할 수 있음
             return true;
         }
         return false;
