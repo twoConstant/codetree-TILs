@@ -3,7 +3,7 @@ import java.io.*;
 
 
 public class Main {
-    private static int cnt = 0;
+    private static int cnt;
 
     public static void main(String[] args) throws IOException {
         // 여기에 코드를 작성해주세요.
@@ -19,12 +19,16 @@ public class Main {
         }
         for(int i = 0; i < E; i++) {
             st = new StringTokenizer(br.readLine());
-            ajList[Integer.parseInt(st.nextToken())].add(Integer.parseInt(st.nextToken()));
+            int node1 = Integer.parseInt(st.nextToken());
+            int node2 = Integer.parseInt(st.nextToken());
+            // 양방항
+            ajList[node1].add(node2);
+            ajList[node2].add(node1);
         }
 
         // 탐색 노드
         int n = 1;
-
+        cnt = 0;
         dfs(n, V, ajList);
         System.out.println(cnt - 1);    // 자신 방문 한 경우 제외
     }
@@ -33,20 +37,18 @@ public class Main {
         // 스택, 방문체크 초기화
         boolean[] visitied = new boolean[V + 1];
         Stack<Integer> stack = new Stack<>();
-
         stack.push(n);
+        visitied[n] = true;
 
-        // 탐색 시작
         while(!stack.empty()) {
-            // pop
             int cn = stack.pop();
-            // 방첵
-            visitied[cn] = true;
+            
             cnt++;
             // 탐색
             for(int w : ajList[cn]){
                 if(!visitied[w]){
                     stack.push(w);
+                    visitied[w] = true;
                 }
             }
         }
