@@ -5,7 +5,6 @@ public class Main {
     private static int N;
     private static int M;
     private static int cnt;
-    private static boolean[][] visited;
     private static int answerHight = 1;
     private static int[] di = {-1, 0, 1, 0};
     private static int[] dj = {0, 1, 0, -1};
@@ -19,7 +18,6 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         arr = new int[N][M];
-        visited = new boolean[N][M];
 
         int maxHeight = 0;
         for(int i = 0; i < N; i++) {
@@ -56,11 +54,7 @@ public class Main {
 
     public static void scanArr(int curHeight) {
         // System.out.println("activate scanArr Method");
-        for(int i = 0; i < N; i++) {
-            for(int j = 0; j < M; j++) {
-                visited[i][j] = false;
-            }
-        }
+        boolean[][] visited = new boolean[N][M];
         cnt = 0;
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < M; j++) {
