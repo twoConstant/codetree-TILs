@@ -6,7 +6,7 @@ public class Main {
     private static int M;
     private static int cnt;
     private static boolean[][] visited;
-    private static int answerHight = 0;
+    private static int answerHight = 1;
     private static int[] di = {-1, 0, 1, 0};
     private static int[] dj = {0, 1, 0, -1};
     private static final int DETAL_SEARCH_NUM = 4;
