@@ -29,61 +29,48 @@ public class Main {
                 }
             }
         }
-        // System.out.println("maxHeight : " + maxHeight);
 
         int answer = getMax(maxHeight);
         System.out.println(answerHight+ " " + answer);
     }
 
     public static int getMax(int maxHeight){
-        // System.out.println("activate getMax Method");
         int maxValue = 0;
         
-        for(int curHeight = 1; curHeight <= maxHeight; curHeight++){    // 1부터 최대건물의 높이까지 반복
+        for(int curHeight = 1; curHeight <= maxHeight -1; curHeight++){    // 1부터 최대건물의 높이까지 반복
             scanArr(curHeight);
-            // System.out.println("curHeight : " + curHeight + "," + "cluster : " + cnt);
             if (cnt > maxValue) {
                 maxValue = cnt;
                 answerHight = curHeight;
-                // System.out.println("최대값 갱신 : " + maxValue + " -> " + cnt);
             }
         }
-        // System.out.println("deActivate getMax Method");
         return maxValue;
     }
 
     public static void scanArr(int curHeight) {
-        // System.out.println("activate scanArr Method");
         boolean[][] visited = new boolean[N][M];
         cnt = 0;
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < M; j++) {
                 if(!visited[i][j] && isHigher(i, j, curHeight)) {
-                    // System.out.println("visited :" + "(" + i + j + ")" + visited[i][j]);
                     dfs(i, j, curHeight, visited);
                 }
             }
         }
-        // System.out.println("deactivate scanArr Method");
     }
 
     public static void dfs(int i, int j, int curHeight, boolean[][] visited) {
-        // System.out.println("curHeight : " + curHeight + ", 탐색시작 건물높이 : " + arr[i][j] + ", 탐색 좌표: " +"(" + i + ", " + j + ")");
         stack.push(new int[]{i, j});
         visited[i][j] = true;
         cnt++;
         while(!stack.empty()){
-            // pop
             int[] cn = stack.pop();
-            // for
             for(int k = 0; k < DETAL_SEARCH_NUM; k++){
-                // push & visited
                 int ni = cn[0] + di[k];
                 int nj = cn[1] + dj[k];
                 if (isInRange(ni, nj) && isHigher(ni, nj, curHeight) && !visited[ni][nj]) {
                     stack.push(new int[]{ni, nj});
                     visited[ni][nj] = true;
-                    // System.out.println("visited true :" + "(" + ni + nj + ")" + visited[ni][nj]);
                 }
             }
         }
