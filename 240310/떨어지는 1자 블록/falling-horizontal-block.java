@@ -42,6 +42,9 @@ public class Main {
                 }
             }
         }
+        for(int k = K; k < K + M; k++ ){
+            arr[N - 1][k] = 1;
+        }
     }
 
 }
