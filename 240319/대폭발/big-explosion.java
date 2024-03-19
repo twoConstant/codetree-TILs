@@ -19,7 +19,11 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
         int[] startNode = {Integer.parseInt(st.nextToken()) - 1, Integer.parseInt(st.nextToken()) - 1};
         visited = new boolean[N][N];
-        
+
+        // 다음 실행을 위한 스택 초기화
+        while(!stack.empty()) {
+            stack.pop();
+        }
         
         // 초기 상황 세팅
         stack.push(startNode);
