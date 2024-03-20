@@ -92,7 +92,7 @@ public class Main {
                     q.add(wn);
                     visited[ni][nj] = true;
                     cnt++;
-                    printVisitied(visited);
+                    // printVisitied(visited);
                 }
                 
             }
