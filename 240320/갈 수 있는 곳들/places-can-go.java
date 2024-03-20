@@ -71,12 +71,11 @@ public class Main {
     public static void bfs(int[] startNode, boolean[][] visited) {
         // q, 방문체크 초기화 작검
         Queue<int[]> q = new LinkedList<>();
-        q.add(startNode);
-        if (visited[startNode[0]][startNode[1]] = false) {
+        if (!visited[startNode[0]][startNode[1]]){
+            q.add(startNode);
             visited[startNode[0]][startNode[1]] = true;
             cnt++;
         }
-        
 
         // 탐색
         while(!q.isEmpty()) {
@@ -93,9 +92,12 @@ public class Main {
                     q.add(wn);
                     visited[ni][nj] = true;
                     cnt++;
+                    printVisitied(visited);
                 }
+                
             }
         }
+
     }
 
 
